@@ -37,10 +37,23 @@ function maxHeapify(heap, heapSize, i) {
 }
 
 const buildMaxHeap = (heap, heapSize) => {
-  for (let i = heapSize / 2; i >= 1; i--) {
+  for (let i = Math.floor(heapSize / 2); i >= 1; i--) {
     maxHeapify(heap, heapSize, i);
   }
 };
 
-buildMaxHeap(arr, arr.length - 1);
+const heapSort = (heap, heapSize) => {
+  let temp;
+  buildMaxHeap(heap, heapSize);
+
+  for (let i = heapSize; i >= 1; i--) {
+    temp = heap[1];
+    heap[1] = heap[i];
+    heap[i] = temp;
+    heapSize -= 1;
+    maxHeapify(heap, heapSize, 1);
+  }
+};
+
+heapSort(arr, arr.length - 1);
 console.log(arr);
